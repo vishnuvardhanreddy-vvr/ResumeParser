@@ -24,9 +24,9 @@ def llm_model(input):
             response = gemini_llm(input=input)
             response = format_llm_response(raw_response=response)
         else:
-            response = {"response":{"error":"Only GEMINI model is available"},"status_code":400}
+            response = {"error":"Only GEMINI model is available"}
     except Exception as e:
-        response = {"response":{"error":str(e)},"status_code":500}
+        response = {"error":str(e)}
     finally:
         return response
 

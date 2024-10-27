@@ -7,7 +7,7 @@ from docx import Document
 from io import BytesIO
 
 from app.utils.llm import llm_model
-from app.resume.prompt import prompt as resume_parser_prompt
+from app.resume.prompt import resume_prompt as resume_parser_prompt
 
 
 
@@ -31,6 +31,7 @@ class ResumeParser():
         self.file = file
         self.file_name = file_name
         self.result = None
+        self.response = None
     
     def parse_resume(self):
         file = self.file
@@ -45,4 +46,11 @@ class ResumeParser():
             self.result = llm_model(prompt)
         else:
             self.result = None
-        return self.result
+        
+        if self.result and not self.result.get("error"):
+            self.response = {"response":{"parsed_resume":self.result},"status_code":200}
+        elif self.result and self.result.get("error"):
+            self.response = {"response":self.result,"status_code":400}
+        else:
+            self.response = {"response":{"message":"something went wrong","parsed_resume":self.result},"status_code":500}
+        return self.response

@@ -4,7 +4,7 @@ WORKDIR /
 
 # Install antiword, LibreOffice, and any additional dependencies
 RUN apt-get update && \
-    apt-get install -y antiword libreoffice && \
+    apt-get install -y antiword libreoffice tesseract-ocr && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY ./requirements.txt /requirements.txt
