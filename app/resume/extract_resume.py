@@ -2,27 +2,11 @@ import os
 import logging
 import json
 import re
-import fitz
-from docx import Document
-from io import BytesIO
 
+
+from app.utils.file_converstions import read_docx, read_pdf
 from app.utils.llm import llm_model
 from app.resume.prompt import resume_prompt as resume_parser_prompt
-
-
-
-def read_pdf(file):
-    text = ""
-    with fitz.open(stream=file, filetype="pdf") as pdf_document:
-        for page in pdf_document:
-            text += page.get_text() + "\n"
-    return text
-
-def read_docx(file):
-    file = BytesIO(file)
-    doc = Document(file)
-    text = "\n".join([paragraph.text for paragraph in doc.paragraphs])
-    return text
 
 
 class ResumeParser():

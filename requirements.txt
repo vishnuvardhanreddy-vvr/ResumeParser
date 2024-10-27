@@ -5,3 +5,5 @@ python-docx
 python-dotenv
 python-multipart
 requests
+pillow
+pytesseract
