@@ -1,0 +1,10 @@
+*__pycache__
+*env
+*json
+*pdf
+*txt
+*docx
+*doc
+
+
+!requirements.txt
